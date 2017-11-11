@@ -14,9 +14,15 @@
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"
   },
   "dependencies": {
+    "bootstrap-table": "^1.11.2",
     "jquery": "^3.2.1",
+    "node-sass": "^4.6.0",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.19.0",
     "vue": "^2.5.2",
-    "vue-router": "^3.0.1"
+    "vue-resource": "^1.3.4",
+    "vue-router": "^3.0.1",
+    "ztree": "^3.5.24"
   },
   "devDependencies": {
     "animate.css": "^3.5.2",

@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var mysql = require('mysql');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -22,7 +23,30 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
+
+var pool = mysql.createPool({
+    host:'localhost',
+    user:'root',
+    password:'123456',
+    database:'liujun',
+    port:'3306'
+})
+var mysqlQuery=function(sql,callback){
+    pool.getConnection(function(err,conn){
+        if(err){
+            callback(err,null,null);
+        }else{
+            conn.query(sql,function(qerr,vals,fields){
+                //释放连接
+                conn.release();
+                //事件驱动回调
+                callback(qerr,vals,fields);
+            });
+        }
+    });
+};
+
+app.use('/liujun/index/tree', index);
 app.use('/users', users);
 
 // catch 404 and forward to error handler
@@ -44,3 +68,4 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+exports.mysqlQuery = mysqlQuery;

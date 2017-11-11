@@ -1,0 +1,29 @@
+.index_header{
+  width: 100%;
+  height: 70px;
+  border: 1px solid #dddddd;
+}
+.index_main_box{
+  position: absolute;
+  top: 70px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.index_main_box_box{
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+.index_main_left{
+  width: 260px;
+  border: 1px solid #dddddd;
+  height: 100%;
+  overflow: auto;
+}
+.index_main_right{
+  flex: 1;
+  border: 1px solid red;
+  height: 100%;
+  overflow: auto;
+}

@@ -3,6 +3,10 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import resource from 'vue-resource'
+import './assets/css/main.scss'
+
+Vue.use(resource)
 
 Vue.config.productionTip = false;  //来关闭生产模式下给出的提示
 
