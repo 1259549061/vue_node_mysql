@@ -1,30 +1,87 @@
 <template>
   <div style="width: 100%">
-    <header class="index_header"></header>
+    <header class="index_header">
+      <img src="../../src/assets/mojiezuo.png" width="32" style="vertical-align: middle">
+      <img src="../../src/assets/mojiezuo.png" width="32">
+      <span style="color: #ffffff">--------</span>
+      <h3 style="color: #ffffff;line-height: 70px;padding-left: 20px;display: inline">slucky 个人知识库</h3>
+      <span style="color: #ffffff">--------</span>
+      <img src="../../src/assets/mojiezuo.png" width="32">
+      <img src="../../src/assets/mojiezuo.png" width="32" style="vertical-align: middle">
+      <input type="button" value="退出" class="btn btn-default pull-right mRight20" style="position: relative;top: 21px;">
+      <span style="color: #ffffff;float: right;margin-right: 20px;margin-left: 20px;line-height: 70px">{{username}}</span>
+      <img src="../../src/assets/user.png" width="28" style="float: right;position: relative;top: 21px;">
+
+    </header>
     <div class="index_main_box">
       <div class="index_main_box_box">
         <div class="index_main_left">
-          <ul style="width: 100%;height: 100%;overflow: auto;padding-top: 10px" id="index_tree" class="ztree"></ul>
+          <ul style="width: 100%;height: 100%;overflow: auto;padding-top: 10px;" id="index_tree" class="ztree"></ul>
         </div>
         <div class="index_main_right"></div>
       </div>
     </div>
+    <ul style="width: 80px;position: absolute;border: 1px solid #dddddd;background-color: #dddddd;"
+        id="onRightId" v-show="onRightShow">
+      <li @click="treeMenu('rename')" style="border-bottom: 1px solid #ffffff">重命名</li>
+      <li @click="treeMenu('delete')">删除</li>
+    </ul>
+    <div class="modal fade" id="treeMenuId" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document" style="margin-top: 100px;width: 400px;">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" @click="menu_return()" aria-label="Close">
+              <span aria-hidden="true" style="font-size: 20px">×</span>
+            </button>
+            <h4 class="modal-title" id="myModalLabel" style="font-size: 16px;">{{menu_title}}</h4>
+          </div>
+          <div class="modal-body">
+            <label v-show="menu_title == '重命名'">请输入名称：</label>
+            <input v-show="menu_title == '重命名'" type="text" class="form-control mTop10" v-model="menu_name">
+            <div v-show="menu_title == '删除'" class="col-xs-12"
+                 style="text-align: center;height: 40px;line-height: 40px;">确定要删除此节点吗？
+            </div>
+            <div class="clear"></div>
+          </div>
+          <div class="modal-footer">
+            <input type="button" class="btn btn-default" value="取消" @click="menu_return()">
+            <input type="button" class="btn btn-primary" value="确定" @click="menu_sure()">
+          </div>
+        </div>
+      </div>
+    </div>
+    <myTips v-bind:tip_type="tip_type" v-bind:tip_text="tip_text" v-show="tipsShow"></myTips>
   </div>
 </template>
 <script>
   require('ztree');
+  require('bootstrap');
+  import myTips from './mytips.vue'
   export default {
     data(){
       return{
-
+        onRightShow:false,
+        menu_title:'',
+        menu_tree_id:'',//选择的树id
+        menu_name:'', //重命名的name,
+        tip_type:'',
+        tip_text:'',
+        tipsShow:false,
+        username:'liujun'
       }
     },
     mounted:function () {
       $('.app_innerbox').css('width','1200px');
       this.init();
     },
+    components:{
+      myTips:myTips
+    },
     methods:{
-      init:function () {
+      init:function (val='init') {
+        if(val === 'init'){
+          this.bindBody();
+        }
         this.tree_setting = {
 //          check:{
 //            enable:true,
@@ -46,9 +103,10 @@
             }
           },
           view:{
-            fontcss:{
-              fontsize:'14px',
-              fontFamily:"Times New Roman"
+            fontCss:{
+              fontSize:'14px',
+              fontFamily:"Times New Roman",
+              color:"#ffffff"
             },
             showIcon:false
           },
@@ -57,13 +115,15 @@
               inner:true
             },
             enable: true,
-            showRemoveBtn: true,
-            showRenameBtn: true,
+            showRemoveBtn: false,
+            showRenameBtn: false,
 
           },
           callback: {
             beforeDrag: this.beforeDrag,
             beforeDrop: this.beforeDrop,
+            onRightClick:this.onRightClick,
+            onClick:this.click
           }
         };
         this.$http.get('/liujun/index/tree/getData').then((data)=>{
@@ -71,13 +131,73 @@
           this.tree_obj = $.fn.zTree.init($("#index_tree"),this.tree_setting,data.body);
           this.tree_obj.expandAll(true)
         })
+      },
+      bindBody:function () {
+        $('body').bind("mousedown",(event)=> {
+          if(event.target.id != 'onRightId' && event.target.innerHTML!="重命名" && event.target.innerHTML!="删除"){
+            this.onRightShow = false;
+          }
+        })
+      },
+      unbindBody:function () {
+        $('body').unbind("mousedown");
+      },
+      beforeDrag:function () {
+
+      },
+      beforeDrop:function () {
+
+      },
+      onRightClick:function(event,treeId,treeNode){
+        if(treeNode==null){
+          return false;
+        }
+        this.menu_tree_id = treeNode.id;
+        this.menu_name = treeNode.name;
+        let width = $(window).width();
+        let offset = 0;
+        if(width>1200){
+          offset = (width - 1200)/2
+        }
+        $("#onRightId").css({top:`${event.clientY + 4}px`,left:`${event.clientX - offset + 10}px`});
+        this.onRightShow = true
+      },
+      click:function (event, treeId, treeNode) {
+        console.log(event, treeId, treeNode)
+        this.$http.get('/liujun/index/tree/getContent',{params:{id:treeId}}).then(data=>{
+          console.log(data)
+        })
+      },
+      treeMenu:function (val) {
+        this.unbindBody();
+        this.onRightShow = false;
+        if(val == 'rename'){
+          this.menu_title = '重命名'
+        }else{ //delete
+          this.menu_title = '删除'
+        }
+        $('#treeMenuId').modal({backdrop:'static'},'show');
+      },
+      menu_sure:function () {
+        if(this.menu_title == '重命名'){
+          this.$http.get('/liujun/index/tree/rename',{params:{id:this.menu_tree_id,name:this.menu_name}}).then((data)=>{
+            console.log(data)
+            if(data.body.message == 'ok'){
+              this.init('refresh');
+            }else{
+
+            }
+          },()=>{
+
+          })
+        }
+        $('#treeMenuId').modal('hide');
+        this.bindBody();
+      },
+      menu_return:function () {
+        $('#treeMenuId').modal('hide');
+        this.bindBody();
       }
     },
-    beforeDrag:function () {
-
-    },
-    beforeDrop:function () {
-
-    }
   }
 </script>

@@ -9,7 +9,9 @@ import './assets/css/main.scss'
 Vue.use(resource)
 
 Vue.config.productionTip = false;  //来关闭生产模式下给出的提示
+Vue.prototype.myTips = function (type,text){
 
+}
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

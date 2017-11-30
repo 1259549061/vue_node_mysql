@@ -23,7 +23,15 @@
 }
 .index_main_right{
   flex: 1;
-  border: 1px solid red;
+  border: 1px solid #dddddd;
   height: 100%;
   overflow: auto;
+}
+#onRightId li{
+  padding:2px 10px;
+  color:#000;
+  &:hover{
+    font-weight: bold;
+    cursor: pointer;
+  }
 }

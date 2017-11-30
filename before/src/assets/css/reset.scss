@@ -4,3 +4,14 @@
   font-size: 13px;
   font-family: "Microsoft Yahei", Verdana, Simsun, "Segoe UI Web Light", "Segoe UI Light", "Segoe UI Web Regular", "Segoe UI", "Segoe UI Symbol", "Helvetica Neue", Arial;
 }
+ul li{
+  list-style-type: none;
+}
+a:hover{
+  text-decoration: none!important;
+}
+.ztree li a.curSelectedNode{
+  background-color: #BEBEBE;
+  color:#308dfc!important;
+  border: 1px solid #BEBEBE;
+}
