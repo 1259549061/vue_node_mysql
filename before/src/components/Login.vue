@@ -2,8 +2,8 @@
   <div class="login_box">
     <div class="login_box_box">
       <div class="login_left">
-        <div class="login_animate animated bounceInLeft" style="font-size: 50px" id="login_title">XXXXX Title</div>
-        <div class="login_animate2 animated bounceInLeft" style="font-size: 50px">写着玩写着玩</div>
+        <div class="login_animate animated bounceInLeft" style="font-size: 50px" id="login_title">slucky 个人知识库</div>
+        <div class="login_animate2 animated bounceInLeft" style="font-size: 50px">旋转 哈哈</div>
       </div>
       <div class="login_right">
         <div class="login_input_box">
@@ -43,7 +43,10 @@ export default {
       })
     },
     login:function () {
-      this.$router.push({name:'index'});
+      $(".login_box").on('webkitAnimationEnd',()=>{
+        this.$router.push({name:'index'});
+      });
+      $('.login_box').addClass('willLogin');
     }
   }
 }

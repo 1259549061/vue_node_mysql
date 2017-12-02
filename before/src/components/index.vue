@@ -3,12 +3,12 @@
     <header class="index_header">
       <img src="../../src/assets/mojiezuo.png" width="32" style="vertical-align: middle">
       <img src="../../src/assets/mojiezuo.png" width="32">
-      <span style="color: #ffffff">--------</span>
-      <h3 style="color: #ffffff;line-height: 70px;padding-left: 20px;display: inline">slucky 个人知识库</h3>
-      <span style="color: #ffffff">--------</span>
+      <span style="color: #ffffff">~ ~ ~ ~ ~</span>
+      <h3 style="color: #ffffff;line-height: 70px;padding-left: 10px;padding-right: 10px;display: inline">slucky 个人知识库</h3>
+      <span style="color: #ffffff">~ ~ ~ ~ ~</span>
       <img src="../../src/assets/mojiezuo.png" width="32">
       <img src="../../src/assets/mojiezuo.png" width="32" style="vertical-align: middle">
-      <input type="button" value="退出" class="btn btn-default pull-right mRight20" style="position: relative;top: 21px;">
+      <input type="button" value="退出" class="btn btn-default pull-right mRight20" @click="loginOut" style="position: relative;top: 21px;">
       <span style="color: #ffffff;float: right;margin-right: 20px;margin-left: 20px;line-height: 70px">{{username}}</span>
       <img src="../../src/assets/user.png" width="28" style="float: right;position: relative;top: 21px;">
 
@@ -18,7 +18,26 @@
         <div class="index_main_left">
           <ul style="width: 100%;height: 100%;overflow: auto;padding-top: 10px;" id="index_tree" class="ztree"></ul>
         </div>
-        <div class="index_main_right"></div>
+        <div class="index_main_right">
+          <div style="width: 96%;margin:0 auto;">
+            <div class="col-md-12 col-xs-12" style="height: 54px;line-height: 54px;border-bottom: 1px dashed #ffffff;">
+              <div class="col-md-3 col-xs-3 col-sm-3 colorF">名称：{{content.name}}</div>
+              <div class="col-md-3 col-xs-3 col-sm-3 colorF">最后更新时间：{{content.updateTime}}</div>
+              <div class="col-md-3 col-xs-3 col-sm-3 col-md-offset-3 col-xs-offset-3 col-sm-offset-3 colorF">
+                <div class="sys_up_box">
+                  <form id="uploadFormCus" enctype="multipart/form-data">
+                    <input type="file" name="file" id="file" class="sys_upload_input" @change="upload">
+                  </form>
+                </div>
+              </div>
+              <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
+          </div>
+          <div style="width: 96%;height:calc(100% - 64px);background-color: #ffffff;color: #000000;margin: 10px auto 0 auto">
+            <textarea class="col-md-12 col-sm-12 col-xs-12" style="height:100%;overflow: auto;resize: none" v-model="content.data"></textarea>
+          </div>
+        </div>
       </div>
     </div>
     <ul style="width: 80px;position: absolute;border: 1px solid #dddddd;background-color: #dddddd;"
@@ -67,7 +86,12 @@
         tip_type:'',
         tip_text:'',
         tipsShow:false,
-        username:'liujun'
+        username:'liujun',
+        content:{
+          name:'',
+          updateTime:'',
+          data:'暂无数据'
+        }
       }
     },
     mounted:function () {
@@ -83,10 +107,6 @@
           this.bindBody();
         }
         this.tree_setting = {
-//          check:{
-//            enable:true,
-//            chkStyle:'checkbox'
-//          },
           data:{
             key:{
               name:'name'
@@ -163,8 +183,8 @@
         this.onRightShow = true
       },
       click:function (event, treeId, treeNode) {
-        console.log(event, treeId, treeNode)
-        this.$http.get('/liujun/index/tree/getContent',{params:{id:treeId}}).then(data=>{
+        this.menu_tree_id = treeNode.id;
+        this.$http.get('/liujun/index/tree/getContent',{params:{id:this.menu_tree_id}}).then(data=>{
           console.log(data)
         })
       },
@@ -197,6 +217,18 @@
       menu_return:function () {
         $('#treeMenuId').modal('hide');
         this.bindBody();
+      },
+      upload:function () {
+        this.$http.post(`/liujun/index/tree/contentUpload?id=${this.menu_tree_id}`,new FormData($('#uploadFormCus')[0])).then(data=>{
+          console.log(data.body.data);
+          this.content.data = data.body.data;
+          $('#file').val('');
+        }).catch(e=>{
+          console.log(e)
+        })
+      },
+      loginOut:function () {
+        this.$router.push({name:'login'})
       }
     },
   }

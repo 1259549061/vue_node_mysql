@@ -35,3 +35,19 @@
     cursor: pointer;
   }
 }
+.sys_up_box{
+  width: 76px;
+  height: 32px;
+  float: right;
+  background: url('../upload.png') center;
+  position: relative;
+  top: 11px;
+}
+.sys_upload_input{
+  display: inline-block;
+  width: 76px;
+  float: right;
+  margin-right: 4px;
+  height: 32px;
+  opacity: 0;
+}

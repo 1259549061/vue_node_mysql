@@ -1,0 +1,162 @@
+C:\Program Files\Apache Software Foundation\Tomcat 8.0
+
+http://www.iconfont.cn/
+
+C:\Windows\System32\drivers\etc\hosts    hosts路径
+
+https://github.com/racaljk/hosts   谷歌hosts最新地址
+
+http://www.ishadowsocks.net/
+
+http://www.haorooms.com/post/input_file_leixing
+
+http://www.dowebok.com/demo/2014/98/     css3动画
+
+http://www.hcharts.cn/index.php  
+
+申请谷歌账户https://accounts.google.com/SignUp
+sluckylj@gmail.com 谷歌
+18252003981ljds
+
+./unabackup.sh mts   重启mts
+
+ps x|grep mts  
+
+kill -15 22733
+
+nohup ./start_mts.sh &
+
+service unabackup restart    重启服务
+
+/unary/unabackup/work/lics 授权文件存放位置
+
+控制代理在线服务 osv , uagent
+
+ps ax | grep 进程名
+
+init 0 关机
+
+ifconfig -a|grep -i hw 查看mac地址
+
+vi /etc/sysconfig/network-scripts/ifcfg-eth0
+
+ks=cdrom://anaconda-bcks.cfg
+
+IPADDR（IP地址）xxxx，NETMASK（掩码）255.255.0.0，GATEWAY（网关）10.10.0.1, DNS1:8.8.8.8
+
+http://10.20.0.226:8090/display/UNABOX6X
+
+http://blog.csdn.net/qidong7/article/details/52373608   jquery选择器
+
+http://www.bootcss.com/p/layoutit/    bootstrap可视化布局系统带源码
+
+http://netsmell.com/post/10-jquery-snippets-for-efficient-web-development.html  jquery代码片段
+
+https://www.zhihu.com/question/36040694  angular知识
+
+https://zhuanlan.zhihu.com/p/22800583  前端知识
+
+http://clintberry.com/2013/angular-js-websocket-service/       angularjs Websocket Service Example
+http://www.ibm.com/developerworks/cn/java/j-lo-WebSocket/   
+
+runsetup.bat -uninstall 卸载代理  C:\Users\Administrator\Desktop\downloader\ubackup\uagent\bin\setup
+
+http://geek.csdn.net/news/detail/111881  前端防盗代码
+
+http://blog.csdn.net/wangjiaohome/article/details/51728217  vue.js项目构建
+
+http://vue.sike.io   vue.js API
+
+http://www.tuicool.com/articles/jueARjE  express入门 搭建博客
+
+打包 先打war包--build 执行build.bat
+
+http://sanwen.net/a/yiixrpo.html   http://www.cnblogs.com/jyichen/p/5660865.html    vue环境搭建
+
+https://angular.cn/docs/ts/latest/guide/setup.html    angular2 开发环境搭建
+
+https://github.com/bodyno/universal-react-starter-kit         react 开发环境搭建（如果npm install 报错则用cnpm install）
+
+http://www.cnblogs.com/xuange306/p/6175680.html  webstorm关于vue配置
+
+http://www.jyvtc.com/dzb/uiFramework/js/zTree-v3.2/api/API_cn.html   ztree API
+
+http://vuejs.org/v2/guide/components.html#Non-Parent-Child-Communication  
+http://vuex.vuejs.org/zh-cn/intro.html
+
+http://www.w3school.com.cn/tags/html_ref_canvas.asp  canvas手册
+
+http://blog.csdn.net/mrbourne/article/details/52933098
+
+http://datatables.club/manual/data.html  datatable示例
+
+http://blog.csdn.net/yuexianchang/article/details/51188309 资源链接库
+
+http://www.ruanyifeng.com/blog/2016/11/javascript.html     阮一峰的网络日志--全栈工程师培训教程
+
+http://10.20.0.99:8001/ 禅道
+
+https://zhuanlan.zhihu.com/p/25600649
+
+http://blog.csdn.net/mergerly/article/details/46991673   node express mysql
+
+http://blog.csdn.net/qq_21342217/article/details/48314083  各大浏览器兼容问题
+
+http://www.oschina.net/project 开源中国
+
+极客标签：     http://www.gbtags.com/
+
+码农周刊：     http://weekly.manong.io/issues/
+
+前端周刊：     http://www.feweekly.com/issues
+
+div.io：	http://div.io
+
+Hacker News： https://news.ycombinator.com/news
+
+InfoQ：       http://www.infoq.com/
+
+w3cplus：     http://www.w3cplus.com/
+
+Stack Overflow： http://stackoverflow.com/
+
+mozilla：     https://developer.mozilla.org/zh-CN/docs/Web/JavaScript
+
+http://ecomfe.github.io/zrender/   Zrender
+
+http://www.cnblogs.com/biehongli/p/5754555.html      java学习路线
+
+http://cssload.net/en/animated-text    loading动画在线生成器
+
+http://www.jianshu.com/p/996671d4dcc4?hmsr=toutiao.io&utm_medium=toutiao.io&utm_source=toutiao.io   js内存空间详解
+
+http://jingyan.baidu.com/article/7f41ecec0e3a25593d095c26.html   express环境变量
+
+echo "# jd" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin https://github.com/1259549061/jd.git
+git push -u origin master
+
+git remote rm origin 删除你本地的仓库添加的远程主分支
+
+
+https://github.com/1259549061/jd.git
+
+http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000  git教程
+
+优阁网  设计
+
+http://cnodejs.org/topic/4f9904f9407edba21468f31e  npm 卡死报错 
+most cases you are behind a proxy or have bad network settings.····
+
+mac 命令行 安装 需要管理员 权限“Please try running this command again as root/Administrator”的解决办法   sudo chown -R $USER /usr/local
+
+
+
+
+
+
+ 
+

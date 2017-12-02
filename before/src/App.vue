@@ -17,7 +17,8 @@
     margin: 0 auto;
     height: 100%;
     position: relative;
-    background-color:#3b3738
+    background: url('../src/assets/will_login_back.jpg');
+    background-size: cover;
   }
   .app_box{
     position: absolute;
