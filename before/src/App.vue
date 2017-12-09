@@ -1,7 +1,7 @@
 <template>
   <div class="app_box">
     <div class="app_innerbox">
-      <header class="index_header" v-show="showHeader">
+      <header class="index_header" v-if="showHeader">
         <img src="./assets/mojiezuo.png" width="32" style="vertical-align: middle">
         <img src="./assets/mojiezuo.png" width="32">
         <span style="color: #ffffff">~ ~ ~ ~ ~</span>
@@ -21,11 +21,11 @@
             <li><router-link to="/page3"><span>333</span></router-link></li>
           </ul>
         </div>
-        <div style="flex: 1">
-          <router-view/>
-        </div>
+        <router-view/>
       </div>
-      <router-view v-show="!showHeader"></router-view>
+      <div v-if="!showHeader" style="width: 100%">
+        <router-view></router-view>
+      </div>
     </div>
   </div>
 </template>
