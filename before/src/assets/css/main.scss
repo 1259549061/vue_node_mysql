@@ -5,3 +5,34 @@
 @import '../../../node_modules/animate.css';
 @import '../../../node_modules/ztree/css/zTreeStyle/zTreeStyle.css';
 @import './reset.scss';
+
+.MainNav{
+  ul li{
+    width: 100%;
+    height: 60px;
+    border: 1px solid #ffffff;
+    border-bottom: none;
+    border-right: none;
+    box-sizing: border-box;
+    text-align: center;
+    line-height: 90px;
+    &:first-child{
+      background: url('../index.png') no-repeat top;
+      background-size: 35px 35px;
+    }
+    &:nth-child(2){
+      background: url('../test.png')  no-repeat top;
+      background-size: 35px 35px;
+    }
+    &:nth-child(3){
+      background: url('../test.png')  no-repeat top;
+      background-size: 35px 35px;
+      border-bottom: 1px solid #ffffff;
+    }
+    span{
+      display: block;
+      width: 100%;
+      height: 100%
+    }
+  }
+}

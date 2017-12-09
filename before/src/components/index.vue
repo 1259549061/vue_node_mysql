@@ -1,18 +1,5 @@
 <template>
-  <div style="width: 100%">
-    <header class="index_header">
-      <img src="../../src/assets/mojiezuo.png" width="32" style="vertical-align: middle">
-      <img src="../../src/assets/mojiezuo.png" width="32">
-      <span style="color: #ffffff">~ ~ ~ ~ ~</span>
-      <h3 style="color: #ffffff;line-height: 70px;padding-left: 10px;padding-right: 10px;display: inline">slucky xxxxxxx</h3>
-      <span style="color: #ffffff">~ ~ ~ ~ ~</span>
-      <img src="../../src/assets/mojiezuo.png" width="32">
-      <img src="../../src/assets/mojiezuo.png" width="32" style="vertical-align: middle">
-      <input type="button" value="退出" class="btn btn-default pull-right mRight20" @click="loginOut" style="position: relative;top: 21px;">
-      <span style="color: #ffffff;float: right;margin-right: 20px;margin-left: 20px;line-height: 70px">{{username}}</span>
-      <img src="../../src/assets/user.png" width="28" style="float: right;position: relative;top: 21px;">
-
-    </header>
+  <div style="width: 100%;position: relative;height: 100%">
     <div class="index_main_box">
       <div class="index_main_box_box">
         <div class="index_main_left">
@@ -40,13 +27,8 @@
         </div>
         <div class="index_main_right" v-show="menu_tree_id == ''">
           <div style="width: 96%;height: 74px;line-height: 74px;margin: 0 auto">
-            <div class="col-md-4 col-sm-4 col-xs-4 colorF padding0">
-              所在位置：{{myLocation}}
-            </div>
-            <div class="col-md-4 col-sm-4 col-xs-4 colorF"></div>
-            <div class="col-md-4 col-sm-4 col-xs-4 colorF"></div>
+
           </div>
-          <div style="width: 96%;height: 500px;margin: 0 auto" id="myBaiduMap"></div>
         </div>
       </div>
     </div>
@@ -79,11 +61,10 @@
         </div>
       </div>
     </div>
-    <myTips v-bind:tip_type="tip_type" v-bind:tip_text="tip_text" v-show="tipsShow"></myTips>
   </div>
 </template>
 
-<script>
+<script type="text/ecmascript-6">
   require('ztree');
   require('bootstrap');
   import myTips from './mytips.vue'
@@ -97,18 +78,17 @@
         tip_type:'',
         tip_text:'',
         tipsShow:false,
-        username:'liujun',
         myLocation:'',
         content:{
           name:'',
           updateTime:'',
           data:'暂无数据'
-        }
+        },
       }
     },
     mounted:function () {
+      this.$parent.showHeader = true;
       console.log(new Date().getFullYear().toString() + (new Date().getMonth()+1) + new Date().getDay() + '_' + new Date().getTime())
-      $('.app_innerbox').css('width','1200px');
       this.init();
     },
     components:{
@@ -167,27 +147,7 @@
         this.renderMap();
       },
       renderMap:function () {
-        var op = this;
-        var geolocation = new BMap.Geolocation();
-        geolocation.getCurrentPosition(function(r){
-          if(this.getStatus() == BMAP_STATUS_SUCCESS){
-            op.myLocation = r.point.lng + ',' + r.point.lat;
-            var map = new BMap.Map("myBaiduMap");    // 创建Map实例
-            map.centerAndZoom(new BMap.Point(r.point.lng,r.point.lat), 11);  // 初始化地图,设置中心点坐标和地图级别
-            //添加地图类型控件
-            map.addControl(new BMap.MapTypeControl({
-              mapTypes:[
-                BMAP_NORMAL_MAP,
-                BMAP_HYBRID_MAP
-              ]}));
-            map.setCurrentCity("上海");          // 设置地图显示的城市 此项是必须设置的
-            map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
-          }
-          else {
-            alert('failed'+this.getStatus());
-          }
 
-        },{enableHighAccuracy: true});
       },
       bindBody:function () {
         $('body').bind("mousedown",(event)=> {
@@ -223,7 +183,11 @@
         this.menu_tree_id = treeNode.id;
         this.$http.get('/liujun/index/tree/getContent',{params:{id:this.menu_tree_id}}).then(data=>{
           console.log(data)
-          this.content.data = data.body.data
+          if(data.body.message == 'ok'){
+            this.content.data = data.body.data
+          }else{
+            alert(data.body.message)
+          }
         })
       },
       treeMenu:function (val) {
@@ -266,10 +230,7 @@
             alert(data.body.message)
           }
           $('#file').val('');
-        })
-      },
-      loginOut:function () {
-        this.$router.push({name:'login'})
+        });
       }
     },
   }

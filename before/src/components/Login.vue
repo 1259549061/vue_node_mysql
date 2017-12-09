@@ -26,10 +26,10 @@
 export default {
   data () {
     return {
-
     }
   },
   mounted:function () {
+    this.$parent.showHeader = false;
     this.init()
   },
   computed:{
@@ -37,7 +37,6 @@ export default {
   },
   methods:{
     init:function () {
-      $('.app_innerbox').css('width','100%');
       $(".login_animate").on('webkitAnimationEnd',()=>{
         $('.login_animate2').addClass('myCircle');
       })

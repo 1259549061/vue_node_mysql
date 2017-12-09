@@ -60,7 +60,7 @@ Vue.prototype.myTime = {
       }
     }
     return ymdhis;
-  }
+  },
 };
 /* eslint-disable no-new */
 new Vue({
